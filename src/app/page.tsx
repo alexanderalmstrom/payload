@@ -1,7 +1,7 @@
+import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import { getPayloadClient } from "../getPayload";
-import { Fragment } from "react";
-import { RichText } from "./_components/RichText";
+import { RichText } from "@/components/RichText";
 
 export default async function Page() {
   const payload = await getPayloadClient();
