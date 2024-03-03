@@ -13,6 +13,7 @@ import { buildConfig } from "payload/config";
 
 import { Users } from "./collections/Users";
 import { Pages } from "./collections/Pages";
+import { MainMenu } from "./globals/MainMenu";
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "",
@@ -22,6 +23,7 @@ export default buildConfig({
   },
   editor: slateEditor({}),
   collections: [Users, Pages],
+  globals: [MainMenu],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },

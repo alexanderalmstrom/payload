@@ -14,7 +14,7 @@ export default async function Page({
     collection: "pages",
     where: {
       slug: {
-        equals: slug,
+        equals: slug ?? "home",
       },
     },
   });
@@ -31,4 +31,15 @@ export default async function Page({
       <RichText content={page.richText} />
     </Fragment>
   );
+}
+
+export async function generateStaticParams() {
+  const payload = await getPayloadClient();
+
+  const pages = await payload.find({
+    collection: "pages",
+    limit: 0,
+  });
+
+  return pages.docs.map(({ slug }: { slug?: string }) => ({ slug }));
 }
