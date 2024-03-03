@@ -5,7 +5,6 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-import { payloadCloud } from "@payloadcms/plugin-cloud";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { slateEditor } from "@payloadcms/richtext-slate";
@@ -20,6 +19,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    css: path.resolve(__dirname, "../src/payload-admin.css"),
   },
   editor: slateEditor({}),
   collections: [Users, Pages],
@@ -30,7 +30,6 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
-  plugins: [payloadCloud()],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
