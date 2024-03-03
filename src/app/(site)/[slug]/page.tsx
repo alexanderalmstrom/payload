@@ -1,16 +1,20 @@
 import { Fragment } from "react";
 import { notFound } from "next/navigation";
-import { getPayloadClient } from "../getPayload";
+import { getPayloadClient } from "@/getPayload";
 import { RichText } from "@/components/RichText";
 
-export default async function Page() {
+export default async function Page({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
   const payload = await getPayloadClient();
 
   const { docs } = await payload.find({
     collection: "pages",
     where: {
       slug: {
-        equals: "home",
+        equals: slug,
       },
     },
   });
