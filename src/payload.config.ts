@@ -19,7 +19,6 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
-    css: path.resolve(__dirname, "../src/payload-admin.css"),
   },
   editor: slateEditor({}),
   collections: [Users, Pages],

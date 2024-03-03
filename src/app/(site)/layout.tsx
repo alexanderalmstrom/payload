@@ -1,16 +1,17 @@
-import "./globals.css";
 import type { ReactNode } from "react";
-import type { Metadata } from "next";
+import { Layout } from "@/components/Layout";
+import { getPayloadClient } from "@/getPayload";
 
-export const metadata: Metadata = {
-  title: "Payload",
-  description: "Payload CMS with Next.js 14 App Router",
-};
+export default async function SiteLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const payload = await getPayloadClient();
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+  const mainMenu = await payload.findGlobal({
+    slug: "main-menu",
+  });
+
+  return <Layout mainMenu={mainMenu}>{children}</Layout>;
 }
